@@ -5,14 +5,18 @@ function Header(props) {
 function Content(props) {
   return (
     <>
+      <Part content={props.part1} number={props.exercises1}/>
+      <Part content={props.part2} number={props.exercises2}/>
+      <Part content={props.part3} number={props.exercises3}/>
+    </>
+  );
+}
+
+function Part (props) {
+  return (
+    <>
       <p>
-        {props.part1} {props.exercises1}
-      </p>
-      <p>
-        {props.part2} {props.exercises2}
-      </p>
-      <p>
-        {props.part3} {props.exercises3}
+        {props.content} {props.number}
       </p>
     </>
   );
