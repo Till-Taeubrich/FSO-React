@@ -1,5 +1,19 @@
 import { useState } from 'react'
 
+const Statistics = ({good, neutral, bad}) => {
+  return(
+      <div class="statistics">
+        <Header text='statistics' />
+        <FeedbackCounter text='good' count={good}  />
+        <FeedbackCounter text='neutral' count={neutral} />
+        <FeedbackCounter text='bad' count={bad} />
+        <FeedbackCounter text='all' count={good + neutral + bad} />
+        <FeedbackCounter text='average' count={(good - bad) / (good+neutral+bad)} />
+        <FeedbackCounter text='positive' count={good / (good+neutral+bad) * 100 + '%'} />
+      </div>
+  )
+}
+
 const Header = ({text}) => {
   return (
     <h2>
@@ -43,17 +57,9 @@ const App = () => {
           <FeedbackButton text='neutral' incrementFeedbackCount={incrementFeedbackCount} feedbackType={neutral} feedbackFunction={setNeutral}/>
           <FeedbackButton text='bad' incrementFeedbackCount={incrementFeedbackCount} feedbackType={bad} feedbackFunction={setBad}/>
         </div>
+        <Statistics good={good} neutral={neutral} bad={bad}/>
       </div>
-      <div class="feedback-display">
-        <Header text='statistics' />
-        <FeedbackCounter text='good' count={good}  />
-        <FeedbackCounter text='neutral' count={neutral} />
-        <FeedbackCounter text='bad' count={bad} />
-        <FeedbackCounter text='all' count={good + neutral + bad} />
-        <FeedbackCounter text='average' count={(good - bad) / (good+neutral+bad)} />
-        <FeedbackCounter text='positive' count={good / (good+neutral+bad) * 100 + '%'} />
-      </div>
-    </div>
+</div>
   )
 }
 
