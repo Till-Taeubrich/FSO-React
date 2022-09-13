@@ -1,62 +1,16 @@
-function Header(props) {
-  return <h1>{props.course}</h1>;
-}
-
-function Content(props) {
-  return (
-    <>
-      <Part content={props.parts[0].name} number={props.parts[0].exercises}/>
-      <Part content={props.parts[1].name} number={props.parts[1].exercises}/>
-      <Part content={props.parts[2].name} number={props.parts[2].exercises}/>
-    </>
-  );
-}
-
-function Part (props) {
-  return (
-    <>
-      <p>
-        {props.content} {props.number}
-      </p>
-    </>
-  );
-}
-
-function Total(props) {
-  return (
-    <div>
-      Number of exercises{' '}
-      {props.parts[0].exercises + props.parts[1].exercises + props.parts[2].exercises}
-    </div>
-  );
-}
+import { useState } from 'react'
 
 const App = () => {
-  const course = {
-    name: 'Half Stack application development',
-    parts: [
-      {
-        name: 'Fundamentals of React',
-        exercises: 10
-      },
-      {
-        name: 'Using props to pass data',
-        exercises: 7
-      },
-      {
-        name: 'State of a component',
-        exercises: 14
-      }
-    ]
-  }
+  // save clicks of each button to its own state
+  const [good, setGood] = useState(0)
+  const [neutral, setNeutral] = useState(0)
+  const [bad, setBad] = useState(0)
 
   return (
     <div>
-      <Header course={course.name} />
-      <Content parts={course.parts} />
-      <Total parts={course.parts} />
+      code here
     </div>
-  );
-};
+  )
+}
 
-export default App;
+export default App
