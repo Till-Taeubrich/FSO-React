@@ -5,20 +5,22 @@ const Statistics = ({ good, neutral, bad }) => {
     return <div>No feedback given</div>;
   }
   return (
-    <div class="statistics">
-      <StatisticLine text="good" count={good} />
-      <StatisticLine text="neutral" count={neutral} />
-      <StatisticLine text="bad" count={bad} />
-      <StatisticLine text="all" count={good + neutral + bad} />
-      <StatisticLine
-        text="average"
-        count={(good - bad) / (good + neutral + bad)}
-      />
-      <StatisticLine
-        text="positive"
-        count={(good / (good + neutral + bad)) * 100 + '%'}
-      />
-    </div>
+    <table className="statistics">
+      <tbody>
+        <StatisticLine text="good" count={good} />
+        <StatisticLine text="neutral" count={neutral} />
+        <StatisticLine text="bad" count={bad} />
+        <StatisticLine text="all" count={good + neutral + bad} />
+        <StatisticLine
+          text="average"
+          count={(good - bad) / (good + neutral + bad)}
+        />
+        <StatisticLine
+          text="positive"
+          count={(good / (good + neutral + bad)) * 100 + '%'}
+        />
+      </tbody>
+    </table>
   );
 };
 
@@ -40,9 +42,10 @@ const Button = ({text, incrementFeedbackCount, feedbackType, feedbackFunction}) 
 
 const StatisticLine = ({text, count}) => {
   return (
-    <div>
-      {text} {count}
-    </div>
+    <tr>
+      <td>{text}</td>
+      <td>{count}</td>
+    </tr>
   )
 }
 
@@ -58,9 +61,9 @@ const App = () => {
 
   return (
     <div className="feedback-section">
-      <div class="feedback-selection">
+      <div className="feedback-selection">
         <Header text="give feedback" />
-        <div class="feedback-buttons">
+        <div className="feedback-buttons">
           <Button
             text="good"
             incrementFeedbackCount={incrementFeedbackCount}
@@ -80,7 +83,7 @@ const App = () => {
             feedbackFunction={setBad}
           />
         </div>
-        <div class="feedback-display">
+        <div className="feedback-display">
           <Header text="statistics" />
           <Statistics good={good} neutral={neutral} bad={bad} />
         </div>
