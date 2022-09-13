@@ -6,15 +6,15 @@ const Statistics = ({ good, neutral, bad }) => {
   }
   return (
     <div class="statistics">
-      <FeedbackCounter text="good" count={good} />
-      <FeedbackCounter text="neutral" count={neutral} />
-      <FeedbackCounter text="bad" count={bad} />
-      <FeedbackCounter text="all" count={good + neutral + bad} />
-      <FeedbackCounter
+      <StatisticLine text="good" count={good} />
+      <StatisticLine text="neutral" count={neutral} />
+      <StatisticLine text="bad" count={bad} />
+      <StatisticLine text="all" count={good + neutral + bad} />
+      <StatisticLine
         text="average"
         count={(good - bad) / (good + neutral + bad)}
       />
-      <FeedbackCounter
+      <StatisticLine
         text="positive"
         count={(good / (good + neutral + bad)) * 100 + '%'}
       />
@@ -30,7 +30,7 @@ const Header = ({text}) => {
   )
 }
 
-const FeedbackButton = ({text, incrementFeedbackCount, feedbackType, feedbackFunction}) => {
+const Button = ({text, incrementFeedbackCount, feedbackType, feedbackFunction}) => {
   return (
     <button onClick={incrementFeedbackCount(feedbackType, feedbackFunction)} >
       {text}
@@ -38,7 +38,7 @@ const FeedbackButton = ({text, incrementFeedbackCount, feedbackType, feedbackFun
   )
 }
 
-const FeedbackCounter = ({text, count}) => {
+const StatisticLine = ({text, count}) => {
   return (
     <div>
       {text} {count}
@@ -61,19 +61,19 @@ const App = () => {
       <div class="feedback-selection">
         <Header text="give feedback" />
         <div class="feedback-buttons">
-          <FeedbackButton
+          <Button
             text="good"
             incrementFeedbackCount={incrementFeedbackCount}
             feedbackType={good}
             feedbackFunction={setGood}
           />
-          <FeedbackButton
+          <Button
             text="neutral"
             incrementFeedbackCount={incrementFeedbackCount}
             feedbackType={neutral}
             feedbackFunction={setNeutral}
           />
-          <FeedbackButton
+          <Button
             text="bad"
             incrementFeedbackCount={incrementFeedbackCount}
             feedbackType={bad}
