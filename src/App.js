@@ -1,18 +1,26 @@
 import { useState } from 'react'
 
-const Statistics = ({good, neutral, bad}) => {
-  return(
-      <div class="statistics">
-        <Header text='statistics' />
-        <FeedbackCounter text='good' count={good}  />
-        <FeedbackCounter text='neutral' count={neutral} />
-        <FeedbackCounter text='bad' count={bad} />
-        <FeedbackCounter text='all' count={good + neutral + bad} />
-        <FeedbackCounter text='average' count={(good - bad) / (good+neutral+bad)} />
-        <FeedbackCounter text='positive' count={good / (good+neutral+bad) * 100 + '%'} />
-      </div>
-  )
-}
+const Statistics = ({ good, neutral, bad }) => {
+  if (good === 0 && neutral === 0 && bad === 0) {
+    return <div>No feedback given</div>;
+  }
+  return (
+    <div class="statistics">
+      <FeedbackCounter text="good" count={good} />
+      <FeedbackCounter text="neutral" count={neutral} />
+      <FeedbackCounter text="bad" count={bad} />
+      <FeedbackCounter text="all" count={good + neutral + bad} />
+      <FeedbackCounter
+        text="average"
+        count={(good - bad) / (good + neutral + bad)}
+      />
+      <FeedbackCounter
+        text="positive"
+        count={(good / (good + neutral + bad)) * 100 + '%'}
+      />
+    </div>
+  );
+};
 
 const Header = ({text}) => {
   return (
@@ -49,18 +57,36 @@ const App = () => {
   }
 
   return (
-    <div className='feedback-section'>
+    <div className="feedback-section">
       <div class="feedback-selection">
-        <Header text='give feedback' />
+        <Header text="give feedback" />
         <div class="feedback-buttons">
-          <FeedbackButton text='good' incrementFeedbackCount={incrementFeedbackCount} feedbackType={good} feedbackFunction={setGood}/>
-          <FeedbackButton text='neutral' incrementFeedbackCount={incrementFeedbackCount} feedbackType={neutral} feedbackFunction={setNeutral}/>
-          <FeedbackButton text='bad' incrementFeedbackCount={incrementFeedbackCount} feedbackType={bad} feedbackFunction={setBad}/>
+          <FeedbackButton
+            text="good"
+            incrementFeedbackCount={incrementFeedbackCount}
+            feedbackType={good}
+            feedbackFunction={setGood}
+          />
+          <FeedbackButton
+            text="neutral"
+            incrementFeedbackCount={incrementFeedbackCount}
+            feedbackType={neutral}
+            feedbackFunction={setNeutral}
+          />
+          <FeedbackButton
+            text="bad"
+            incrementFeedbackCount={incrementFeedbackCount}
+            feedbackType={bad}
+            feedbackFunction={setBad}
+          />
         </div>
-        <Statistics good={good} neutral={neutral} bad={bad}/>
+        <div class="feedback-display">
+          <Header text="statistics" />
+          <Statistics good={good} neutral={neutral} bad={bad} />
+        </div>
       </div>
-</div>
-  )
+    </div>
+  );
 }
 
 export default App
