@@ -16,11 +16,20 @@ const App = () => {
     setSelected(nextAnecdotePosition);
   };
 
+  const voteForAnecdote = () => {
+    const copy = { ...points };
+    copy[selected] += 1;
+    setPoints(copy);
+  };
+
   const [selected, setSelected] = useState(0);
+  const [points, setPoints] = useState([0, 0, 0, 0, 0, 0, 0]);
 
   return (
     <>
       <div>{anecdotes[selected]}</div>
+      <div>{points[selected]}</div>
+      <button onClick={voteForAnecdote}>vote</button>
       <button onClick={selectNextAnecdote}>next anecdote</button>
     </>
   );
