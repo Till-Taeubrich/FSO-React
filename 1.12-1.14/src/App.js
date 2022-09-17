@@ -17,20 +17,32 @@ const App = () => {
   };
 
   const voteForAnecdote = () => {
-    const copy = { ...points };
+    const copy = [ ...points ];
     copy[selected] += 1;
     setPoints(copy);
+    findPopularAnecdote(copy)
+  };
+
+  const findPopularAnecdote = (copy) => {
+    const popularAnecdote = Math.max(...copy);
+    const indexOfMax = copy.indexOf(popularAnecdote);
+    setPopularAnecdotePosition(indexOfMax);
   };
 
   const [selected, setSelected] = useState(0);
   const [points, setPoints] = useState([0, 0, 0, 0, 0, 0, 0]);
+  const [popularAnecdotePosition, setPopularAnecdotePosition] = useState();
 
   return (
     <>
+      <h2>Anecdote of the day</h2>
       <div>{anecdotes[selected]}</div>
       <div>{points[selected]}</div>
       <button onClick={voteForAnecdote}>vote</button>
       <button onClick={selectNextAnecdote}>next anecdote</button>
+      <h2>Anecdote with most votes</h2>
+      <div>{anecdotes[popularAnecdotePosition]}</div>
+      <div>{points[popularAnecdotePosition]}</div>
     </>
   );
 };
